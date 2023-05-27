@@ -35,3 +35,41 @@ String s = "javatpoint";
 System.out.println("HashCode Generated for the string is: " + getMd5Hash(s));  
 }  
 }  
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <openssl/md5.h>
+
+void calculate_md5_hash(const char* message, unsigned char* hash) {
+    MD5_CTX md5_context;
+    MD5_Init(&md5_context);
+    MD5_Update(&md5_context, message, strlen(message));
+    MD5_Final(hash, &md5_context);
+}
+
+int main() {
+    const char* message = "Hello, MD5!";
+    unsigned char hash[MD5_DIGEST_LENGTH];
+
+    calculate_md5_hash(message, hash);
+
+    printf("Original message: %s\n", message);
+    printf("MD5 hash value: ");
+    for (int i = 0; i < MD5_DIGEST_LENGTH; i++) {
+        printf("%02x", hash[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
